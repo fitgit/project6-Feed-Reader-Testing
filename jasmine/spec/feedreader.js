@@ -123,7 +123,7 @@ $(function() {
             //on a page load, loadFeed(0) is executed , lets get its values;
             entries=$('.feed .entry h2').text();
             feedTitle=$('.header-title').text();
-            console.log("entries= " +entries +"titles=" + feedTitle);
+            //console.log("entries= " +entries +"titles=" + feedTitle);
             //execute the new feed.
             loadFeed(1,done);
         });
