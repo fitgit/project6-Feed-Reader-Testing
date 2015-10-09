@@ -1,7 +1,7 @@
 # Project6-Feed Reader.
 ## To run the project,
-1. Click on the index.html. All the Tests below under the test suites should be green
-## RSS Feeds
+1. Click on the index.html. All the Tests below under the test suites should be green.
+### RSS Feeds
 ### :URL not undefined
 ### :URL not empty
 ### :Name not undefined
