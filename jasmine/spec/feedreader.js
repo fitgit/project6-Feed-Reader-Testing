@@ -12,50 +12,35 @@ $(function() {
     /*  Test suite -RSS Feeds
     *   Pre-condtion: expexts allFeeds to be defined and has atleast one object(url,name)
     *
-    *   Test case -url not defined 
+    *   Test case -url not undefined and url not empty 
     *   Goes thro each feed and checks if url is defined.
     *
-    *   Test case -url not empty 
-    *   Goes thro each feed and checks if url is not empty.
-    *
-    *   Test case -name not defined 
+    *   Test case -name not undefined name not empty 
     *   Goes thro each feed and checks if name is defined.
     *
-    *   Test case -name not empty 
-    *   Goes thro each feed and checks if name is not empty.
     */
     describe('RSS Feeds', function() {
         
-         beforeEach(function(){
+    
+        it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
-            this.clickedOnce=false;
-         });
+        });
 
-         it(':URL not undefined',function(){
+
+         it(':URL not undefined and URL not empty',function(){
             allFeeds.forEach(function(feed){
                 expect(feed.url).toBeDefined();
-            });
-         });
-
-         it(':URL not empty',function(){
-            allFeeds.forEach(function(feed){
                 expect(feed.url.length).not.toBe(0);
             });
          });
-       
-         it(':Name not undefined',function(){
+
+         it(':Name not undefined and Name not empty',function(){
             allFeeds.forEach(function(feed){
                 expect(feed.name).toBeDefined();
-            });
-         });
-
-         it(':Name not empty',function(){
-            allFeeds.forEach(function(feed){
                 expect(feed.name.length).not.toBe(0);
             });
          });
-
     });
 
     /*  Test suite -The Menu
@@ -63,12 +48,11 @@ $(function() {
     *   Test case -Default behaviour hide menu
     *   checks if body has the "menu-hidden" class, if it does then Menu is not showing
     *
-    *   Test case -:HamburgerIcon clicked,Display Menu
+    *   Test case -:HamburgerIcon clicked,Display/Hide Menu
     *   simulate a click on menu-icon-click and checks for menu-hidden class. Since not found
     *   menu is not hidden.
     *
-    *   Test case -HamburgerIcon clicked again, Hide  menu
-    *   Simulates 2 clicks. First for displaying the menu, second for toggling the display.
+    *   Simulates a 2 click. The second click is for toggling the display.
     *   Checks for the menu-hidden class.
     *   
     */
@@ -78,20 +62,14 @@ $(function() {
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
-        it(':HamburgerIcon clicked, Display Menu',function(){
+        it(':HamburgerIcon clicked, Display/hide Menu',function(){
+             //first click - which would show the Menu
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(false);
-            //reset the click , with another click, so the clicked state does not flow to the next it()
-            $('.menu-icon-link').trigger('click');
-        });
-
-        it(':HamburgerIcon clicked again, Hide  menu',function(){
-            //first click - which would show the Menu - the case above
-            $('.menu-icon-link').trigger('click');
-
-            //second click - which would toggle to hide
+             //second click - which would toggle to hide
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(true);
+           
         });
     });
 
@@ -121,8 +99,8 @@ $(function() {
     describe('New feed selection', function() {
         beforeEach(function(done){
             //on a page load, loadFeed(0) is executed , lets get its values;
-            entries=$('.feed .entry h2').text();
-            feedTitle=$('.header-title').text();
+            this.entries=$('.feed .entry h2').text();
+            this.feedTitle=$('.header-title').text();
             //console.log("entries= " +entries +"titles=" + feedTitle);
             //execute the new feed.
             loadFeed(1,done);
@@ -132,7 +110,7 @@ $(function() {
         });
 
         it(':Entries change on new Feed',function(done){
-            expect($('.feed .entry h2').text()).not.toBe(entries);
+            expect($('.feed .entry h2').text()).not.toBe(this.entries);
             done();   
         });
 
