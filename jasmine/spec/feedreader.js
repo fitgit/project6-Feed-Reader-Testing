@@ -99,8 +99,8 @@ $(function() {
     describe('New feed selection', function() {
         beforeEach(function(done){
             //on a page load, loadFeed(0) is executed , lets get its values;
-            this.entries = $('.feed .entry h2').text();
-            this.feedTitle = $('.header-title').text();
+            this.entries = $('.feed .entry h2').html();
+            this.feedTitle = $('.header-title').html();
             //console.log("entries= " +entries +"titles=" + feedTitle);
             //execute the new feed.
             loadFeed(1,done);
@@ -110,7 +110,7 @@ $(function() {
         });
 
         it(':Entries change on new Feed',function(done){
-            expect($('.feed .entry h2').text()).not.toBe(this.entries);
+            expect($('.feed .entry h2').html()).not.toBe(this.entries);
             done();   
         });
 
